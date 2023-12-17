@@ -16,6 +16,7 @@ from Components.Sources.List import List
 from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
+from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.ScrollLabel import ScrollLabel
 from . import _, getSkin, ScreenWidth
 
@@ -24,9 +25,9 @@ MAIN_URL = "https://www.foreca.com"
 Plugin_Path = os.path.dirname(os.path.realpath(__file__))
 HEADERS = {'User-Agent': 'Mozilla/5.0 (SmartHub; SMART-TV; U; Linux/SmartTV; Maple2012) AppleWebKit/534.7 (KHTML, like Gecko) SmartTV Safari/534.7', 'Accept-Encoding': 'gzip, deflate'}
 lang = language.getLanguage()[:2]
-plugin_version = '1.1'
+plugin_version = '1.2'
 city_list = '/etc/enigma2/meteoforeca_city.json'
-addFont(Plugin_Path + "/skins/Stylo_Bold.ttf", "MFRegular", 100, 1)
+addFont(Plugin_Path + "/skins/Stylo_Bold.ttf", "MFRegular", 100, 0)
 
 
 def write_log(value):
@@ -229,9 +230,17 @@ class MeteoForecaConf(ConfigListScreen, Screen):
          getConfigListEntry(_('City:'), meteoforecacfg.city)
          ])
         self['actions'] = ActionMap(["MeteoForecaActions"], {
-            'ok': self.save, 'green': self.save,
-            'cancel': self.exit, 'red': self.exit}, -2)
-
+            'ok': self.ok, 
+            'green': self.save,
+            'cancel': self.exit, 
+            'red': self.exit
+            }, -2)
+          
+    def ok(self):
+        if self["config"].getCurrentIndex() == 4:
+            self.session.openWithCallback(self.close, MeteoForecaSearch)
+        else:
+            self.save()
     def save(self):
         for x in self['config'].list:
             x[1].save()
@@ -240,6 +249,95 @@ class MeteoForecaConf(ConfigListScreen, Screen):
     def exit(self):
         for x in self['config'].list:
             x[1].cancel()
+        self.close() 
+            
+class MeteoForecaSearch(Screen):
+
+    def __init__(self, session):
+        Screen.__init__(self, session)
+        self.session = session
+        self.skin = getSkin("MeteoForecaSearch")
+        self['key_red'] = Label(_('Cancel'))
+        self['key_green'] = Label(_('Select'))
+        self['description'] = Label()
+        self['key_blue'] = Label()
+        self.citylist = []
+        self["citylist"] = List(self.citylist)
+        self['actions'] = ActionMap(["MeteoForecaActions"], {
+            'ok': self.ok,
+            'cancel': self.exit,
+            "blue": self.openVirtualKeyBoard,
+            'red': self.exit
+        }, -2)
+        self.City_List()
+
+    def City_List(self):
+        self['description'].setText(_('Select City'))
+        self['key_blue'].setText(_('Search'))
+        self.citylist = [] 
+        if os.path.isfile(city_list):
+            with open(city_list, "r") as f:
+                b = json.load(f)
+                for k in b:
+                    i = b.get(k)
+                    countryName = i.get('countryName').replace(", ", "\n")
+                    name = i.get('name')
+                    timezone = i.get('timezone')
+                    lat = str(i.get('lat'))
+                    lon = str(i.get('lon'))
+                    link = "{}/{}-{}".format(k, i.get('defaultName'), i.get('defaultCountryName'))
+                    self.citylist.append((name, countryName, timezone,lat, lon, link, ""))    
+                
+        self["citylist"].setList(self.citylist)
+
+    def openVirtualKeyBoard(self):
+        self.session.openWithCallback(self.search, VirtualKeyBoard, title=_('Enter the name of the locality'), text="") 
+
+    def ok(self):
+       if self["citylist"]:
+            if self["citylist"].getCurrent()[5]:
+                meteoforecacfg.city.setValue(self["citylist"].getCurrent()[5])
+                meteoforecacfg.save()
+                configfile.save()
+                self.close()
+            else:
+                new_city  = self["citylist"].getCurrent()[6]
+                city  = {}
+                city["countryName"] = new_city.get("countryName")
+                city["name"] = new_city.get("name")
+                city["defaultCountryName"] = new_city.get("defaultCountryName")
+                city["defaultName"] = new_city.get("defaultName")
+                city["timezone"] = new_city.get("timezone")
+                city["lat"] = new_city.get("lat")
+                city["lon"] = new_city.get("lon")
+                if os.path.isfile(city_list):
+                    with open(city_list, "r") as f:
+                        b = json.load(f)
+                        z= len(b)    
+                else:
+                    z = 0
+                    b = {}
+                b.update({self["citylist"].getCurrent()[6].get("id") : city})
+                with open(city_list, "w", encoding='utf-8') as f:
+                    f.write(json.dumps(b,ensure_ascii=False, sort_keys=False, indent=2))
+                self.City_List()
+
+    def search(self, city):
+        self.citylist = []
+        self['description'].setText(_('Result Search for " %s "') % city)
+        search_url = 'https://api.foreca.net/locations/search/{}.json?limit=10&lang={}'.format(city, lang)
+        response_search = requests.get(search_url, headers=HEADERS).text 
+        b = json.loads(response_search)
+        for  i in b.get('results'):
+            countryName = i.get('countryName').replace(", ", "\n")
+            name = i.get('name')
+            timezone = i.get('timezone')
+            lat = str(i.get('lat'))
+            lon = str(i.get('lon')) 
+            self.citylist.append((name, countryName, timezone, lat, lon, "", i))
+        self["citylist"].setList(self.citylist)
+
+    def exit(self):
         self.close()
 
 
