@@ -1,0 +1,101 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MeteoForeca\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2023-12-09 16:56+0100\n"
+"Last-Translator: Vasiliks\n"
+"Language-Team: \n"
+"Language: uk\n"
+"Language: uk_UA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 3.4.1\n"
+
+msgid "Feels like "
+msgstr "За відчуттям "
+
+msgid "Relative humidity :"
+msgstr "Відносна вологість :"
+
+msgid "Precip chance :"
+msgstr "Ймовірність опадів :"
+
+msgid "Pressure :"
+msgstr "Тиск :"
+
+msgid "Rain :"
+msgstr "Дощ :"
+
+msgid "Temperature:"
+msgstr "Температура:"
+
+msgid "Wind speed:"
+msgstr "Швидкість вітру:"
+
+msgid "Pressure:"
+msgstr "Тиск:"
+
+msgid "Precipitation:"
+msgstr "Опади:"
+
+msgid "Country :{}\n"
+msgstr "Країна :{}\n"
+
+msgid "Location :{}\n"
+msgstr "Місцерозташування :{}\n"
+
+msgid "Timezone :{}\n"
+msgstr "Часовий пояс :{}\n"
+
+msgid "Longitude :{}\n"
+msgstr "Довгота :{}\n"
+
+msgid "Latitude :{}\n"
+msgstr "Широта :{}\n"
+
+msgid "Elevation :{}\n"
+msgstr "Висота :{}\n"
+
+msgid "mm"
+msgstr "мм"
+
+msgid "in"
+msgstr "дюйм"
+
+msgid "mmHg"
+msgstr "мм рт.ст."
+
+msgid "m/s"
+msgstr "м/с"
+
+msgid "km/h"
+msgstr "км/год"
+
+msgid "mph"
+msgstr "mph"
+
+msgid "Settings"
+msgstr "Налаштування"
+
+msgid "Cancel"
+msgstr "Відмінити"
+
+msgid "Save"
+msgstr "Зберегти"
+
+msgid "Exit"
+msgstr "Вихід"
+
+msgid "MIDNIGHT"
+msgstr "НІЧЬ"
+
+msgid "MORNING"
+msgstr "РАНОК"
+
+msgid "AFTERNOON"
+msgstr "ДЕНЬ"
+
+msgid "EVENING"
+msgstr "ВЕЧІР"

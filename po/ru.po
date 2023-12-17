@@ -1,0 +1,104 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MeteoForeca\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2023-12-08 17:43+0100\n"
+"Last-Translator: Vasiliks\n"
+"Language-Team: \n"
+"Language: ru\n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 3.4.1\n"
+
+msgid "Feels like "
+msgstr "По ощущению "
+
+msgid "Relative humidity :"
+msgstr "Относительная влажность :"
+
+msgid "Precip chance :"
+msgstr "Вероятность осадков :"
+
+msgid "Pressure :"
+msgstr "Давление :"
+
+msgid "Rain :"
+msgstr "Дождь :"
+
+msgid "Temperature:"
+msgstr "Температура:"
+
+msgid "Wind speed:"
+msgstr "Скорость ветра:"
+
+msgid "Pressure:"
+msgstr "Давление:"
+
+msgid "Precipitation:"
+msgstr "Осадки:"
+
+msgid "Units"
+msgstr "Единицы измерения"
+
+msgid "Country :{}\n"
+msgstr "Страна :{}\n"
+
+msgid "Location :{}\n"
+msgstr "Местоположение :{}\n"
+
+msgid "Timezone :{}\n"
+msgstr "Часовой пояс :{}\n"
+
+msgid "Longitude :{}\n"
+msgstr "Долгота :{}\n"
+
+msgid "Latitude :{}\n"
+msgstr "Широта :{}\n"
+
+msgid "Elevation :{}\n"
+msgstr "Высота :{}\n"
+
+msgid "mm"
+msgstr "мм"
+
+msgid "in"
+msgstr "дюйм"
+
+msgid "mmHg"
+msgstr "мм рт.ст."
+
+msgid "m/s"
+msgstr "м/с"
+
+msgid "km/h"
+msgstr "км/ч"
+
+msgid "mph"
+msgstr "mph"
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Cancel"
+msgstr "Отменить"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Exit"
+msgstr "Выход"
+
+msgid "MIDNIGHT"
+msgstr "НОЧЬ"
+
+msgid "MORNING"
+msgstr "УТРО"
+
+msgid "AFTERNOON"
+msgstr "ДЕНЬ"
+
+msgid "EVENING"
+msgstr "ВЕЧЕР"
