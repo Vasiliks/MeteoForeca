@@ -1,0 +1,134 @@
+<!-- Embeded skin for MeteoForeca plugin -->
+<!-- created by Vasiliks 12.2023 -->
+<skin>
+    <screen name="MeteoForeca" position="fill" flags="wfNoBorder" backgroundColor="#00000000" >
+        <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MeteoForeca/images/foreca-logo.svg" position="center,center" size="270*f,60*f" alphatest="on" zPosition="2" transparent="1" scale="on" />
+        <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MeteoForeca/images/background.png" position="0,0" size="1280*f,720*f" alphatest="on" zPosition="-2" transparent="0" scale="on" />
+        <eLabel backgroundColor="#0000CD" position="0,0" size="1280*f,2*f" zPosition="-1" />
+        <eLabel backgroundColor="#0000CD" position="0,260*f" size="1280*f,2*f" zPosition="-1" />
+        <eLabel backgroundColor="#0000CD" position="0,460*f" size="1280*f,2*f" zPosition="-1" />
+        <eLabel backgroundColor="#0000CD" position="0,718*f" size="1280*f,2*f" zPosition="-1" />
+        <eLabel backgroundColor="#0000CD" position="0,0" size="2*f,720*f" zPosition="-1" />
+        <eLabel backgroundColor="#0000CD" position="640*f,0" size="2*f,260*f" zPosition="-1" />
+        <eLabel backgroundColor="#0000CD" position="640*f,460*f" size="2*f,720*f" zPosition="-1" />
+        <eLabel backgroundColor="#0000CD" position="1278*f,0" size="2*f,720*f" zPosition="-1" />
+        
+        <widget name="city" position="40*f,290*f" size="440*f,180*f" font="MFRegular;22*f" foregroundColor="#eeeeee" transparent="1"  split="1" dividechar=":" colposition="220*f" />
+        
+        <widget name="date0" position="460*f,18*f" size="170*f,30*f" font="MFRegular;24*f" foregroundColor="#00FF7F" transparent="1" halign="center" />
+        <widget name="date1" position="1100*f,18*f" size="160*f,30*f" font="MFRegular;24*f" foregroundColor="#00FF7F" transparent="1" halign="center" />
+        <widget name="date2" position="460*f,478*f" size="160*f,30*f" font="MFRegular;24*f" foregroundColor="#00FF7F" transparent="1" halign="center" />
+        <widget name="date3" position="1100*f,478*f" size="160*f,30*f" font="MFRegular;24*f" foregroundColor="#00FF7F" transparent="1" halign="center" />
+        
+        <widget name="time0" position="460*f,48*f" size="170*f,30*f" font="MFRegular;24*f" foregroundColor="blue" transparent="1" halign="center" />
+        <widget name="time1" position="1100*f,48*f" size="160*f,30*f" font="MFRegular;24*f" foregroundColor="blue" transparent="1" halign="center" />
+        <widget name="time2" position="460*f,508*f" size="160*f,30*f" font="MFRegular;24*f" foregroundColor="blue" transparent="1" halign="center" />
+        <widget name="time3" position="1100*f,508*f" size="160*f,30*f" font="MFRegular;24*f" foregroundColor="blue" transparent="1" halign="center" />
+        
+        <widget name="temperature0" position="12*f,16*f" size="120*f,52*f" font="MFRegular;50*f" foregroundColor="red" transparent="1" halign="center" />
+        <widget name="temperature1" position="652*f,16*f" size="120*f,52*f" font="MFRegular;50*f" foregroundColor="red" transparent="1" halign="center" />
+        <widget name="temperature2" position="12*f,476*f" size="120*f,52*f" font="MFRegular;50*f" foregroundColor="red" transparent="1" halign="center" />
+        <widget name="temperature3" position="651*f,476*f" size="120*f,52*f" font="MFRegular;50*f" foregroundColor="red" transparent="1" halign="center" />
+        
+        <widget name="flike0" position="20*f,80*f" size="230*f,30*f" font="MFRegular;20*f" foregroundColor="#58D68D" transparent="1" halign="center" />
+        <widget name="flike1" position="660*f,80*f" size="230*f,30*f" font="MFRegular;20*f" foregroundColor="#58D68D" transparent="1" halign="center" />
+        <widget name="flike2" position="20*f,540*f" size="230*f,30*f" font="MFRegular;20*f" foregroundColor="#58D68D" transparent="1" halign="center" />
+        <widget name="flike3" position="660*f,540*f" size="230*f,30*f" font="MFRegular;20*f" foregroundColor="#58D68D" transparent="1" halign="center" />
+        
+        <widget name="windspeed0" position="80*f,144*f" size="100*f,30*f" font="MFRegular;24*f" foregroundColor="#FF00FF" transparent="1" halign="center" />
+        <widget name="windspeed1" position="720*f,144*f" size="100*f,30*f" font="MFRegular;24*f" foregroundColor="#FF00FF" transparent="1" halign="center" />
+        <widget name="windspeed2" position="80*f,604*f" size="100*f,30*f" font="MFRegular;24*f" foregroundColor="#FF00FF" transparent="1" halign="center" />
+        <widget name="windspeed3" position="720*f,604*f" size="100*f,30*f" font="MFRegular;24*f" foregroundColor="#FF00FF" transparent="1" halign="center" />
+        
+        <widget name="windgust0" position="80*f,174*f" size="100*f,30*f" font="MFRegular;24*f" foregroundColor="red" transparent="1" halign="center" />
+        <widget name="windgust1" position="720*f,174*f" size="100*f,30*f" font="MFRegular;24*f" foregroundColor="red" transparent="1" halign="center" />
+        <widget name="windgust2" position="80*f,634*f" size="100*f,30*f" font="MFRegular;24*f" foregroundColor="red" transparent="1" halign="center" />
+        <widget name="windgust3" position="720*f,634*f" size="100*f,30*f" font="MFRegular;24*f" foregroundColor="red" transparent="1" halign="center" />
+        
+        <widget name="windd0" position="20*f,150*f" size="50*f,50*f" zPosition="2" alphatest="on" />
+        <widget name="windd1" position="660*f,150*f" size="50*f,50*f" zPosition="2" alphatest="on" />
+        <widget name="windd2" position="20*f,610*f" size="50*f,50*f" zPosition="2" alphatest="on" />
+        <widget name="windd3" position="660*f,610*f" size="50*f,50*f" zPosition="2" alphatest="on" />
+        
+        <widget name="symb0" position="180*f,16*f" size="60*f,60*f" alphatest="on" />
+        <widget name="symb1" position="820*f,16*f" size="60*f,60*f" alphatest="on" />
+        <widget name="symb2" position="180*f,476*f" size="60*f,60*f" alphatest="on" />
+        <widget name="symb3" position="820*f,476*f" size="60*f,60*f" alphatest="on" />
+        
+        <widget name="wx0" position="40*f,220*f" size="560*f,30*f" font="MFRegular;24*f" foregroundColor="#FFFF00" transparent="1" halign="right" />
+        <widget name="wx1" position="680*f,220*f" size="560*f,30*f" font="MFRegular;24*f" foregroundColor="#FFFF00" transparent="1" halign="right" />
+        <widget name="wx2" position="40*f,680*f" size="560*f,30*f" font="MFRegular;24*f" foregroundColor="#FFFF00" transparent="1" halign="right" />
+        <widget name="wx3" position="680*f,680*f" size="560*f,30*f" font="MFRegular;20*f" foregroundColor="#FFFF00" transparent="1" halign="right" />
+        
+        <widget name="uvi0" position="280*f,30*f" size="60*f,34*f" zPosition="2" alphatest="on" />
+        <widget name="uvi1" position="920*f,30*f" size="60*f,34*f" zPosition="2" alphatest="on" />
+        <widget name="uvi2" position="280*f,490*f" size="60*f,34*f" zPosition="2" alphatest="on" />
+        <widget name="uvi3" position="920*f,490*f" size="60*f,34*f" zPosition="2" alphatest="on" />
+        
+        <widget name="pres0" position="220*f,106*f" size="400*f,26*f" font="MFRegular;20*f" foregroundColor="#1E90FF" transparent="1" split="1" dividechar=":" colposition="0" />
+        <widget name="pres1" position="860*f,106*f" size="400*f,26*f" font="MFRegular;20*f" foregroundColor="#1E90FF" transparent="1" split="1" dividechar=":" colposition="0" />
+        <widget name="pres2" position="220*f,566*f" size="400*f,26*f" font="MFRegular;20*f" foregroundColor="#1E90FF" transparent="1" split="1" dividechar=":" colposition="0" />
+        <widget name="pres3" position="860*f,566*f" size="400*f,30*f" font="MFRegular;20*f" foregroundColor="#1E90FF" transparent="1" split="1" dividechar=":" colposition="0" />
+        
+        <widget name="rhum0" position="220*f,132*f" size="400*f,26*f" font="MFRegular;20*f" foregroundColor="#1E90FF" transparent="1" split="1" dividechar=":" colposition="0" />
+        <widget name="rhum1" position="860*f,132*f" size="400*f,26*f" font="MFRegular;20*f" foregroundColor="#1E90FF" transparent="1" split="1" dividechar=":" colposition="0" />
+        <widget name="rhum2" position="220*f,592*f" size="400*f,26*f" font="MFRegular;20*f" foregroundColor="#1E90FF" transparent="1" split="1" dividechar=":" colposition="0" />
+        <widget name="rhum3" position="860*f,592*f" size="400*f,26*f" font="MFRegular;20*f" foregroundColor="#1E90FF" transparent="1" split="1" dividechar=":" colposition="0" />
+        
+        <widget name="rainp0" position="220*f,158*f" size="400*f,26*f" font="MFRegular;20*f" foregroundColor="#1E90FF" transparent="1" split="1" dividechar=":" colposition="0" />
+        <widget name="rainp1" position="860*f,158*f" size="400*f,26*f" font="MFRegular;20*f" foregroundColor="#1E90FF" transparent="1" split="1" dividechar=":" colposition="0" />
+        <widget name="rainp2" position="220*f,618*f" size="400*f,26*f" font="MFRegular;20*f" foregroundColor="#1E90FF" transparent="1" split="1" dividechar=":" colposition="0" />
+        <widget name="rainp3" position="860*f,618*f" size="400*f,26*f" font="MFRegular;20*f" foregroundColor="#1E90FF" transparent="1" split="1" dividechar=":" colposition="0" />
+        
+        <widget name="rain0" position="220*f,184*f" size="400*f,26*f" font="MFRegular;20*f" foregroundColor="#1E90FF" transparent="1" split="1" dividechar=":" colposition="0" />
+        <widget name="rain1" position="860*f,184*f" size="400*f,26*f" font="MFRegular;20*f" foregroundColor="#1E90FF" transparent="1" split="1" dividechar=":" colposition="0" />
+        <widget name="rain2" position="220*f,644*f" size="400*f,26*f" font="MFRegular;20*f" foregroundColor="#1E90FF" transparent="1" split="1" dividechar=":" colposition="0" />
+        <widget name="rain3" position="860*f,644*f" size="400*f,26*f" font="MFRegular;20*f" foregroundColor="#1E90FF" transparent="1" split="1" dividechar=":" colposition="0" />
+        
+        <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MeteoForeca/images/key_red.svg" position="1240*f,370*f" size="24*f,24*f" transparent="1" alphatest="on" scale="on" />
+        <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MeteoForeca/images/key_blue.svg" position="1240*f,410*f" size="24*f,24*f" transparent="1" alphatest="on" scale="on" />
+        <widget name="key_red" position="1060*f,370*f" size="160*f,26*f"  font="MFRegular;18*f"  halign="right" transparent="1" valign="center" />
+        <widget name="key_blue" position="1060*f,410*f" size="160*f,26*f" font="MFRegular;18*f" halign="right" transparent="1" valign="center" />
+    </screen>  
+ 
+    <screen name="MeteoForecaConf" position="center,center" size="500*f,220*f" flags="wfNoBorder" >
+        <widget source="Title" render="Label" position="40*f,12*f" size="300*f,28*f" font="MFRegular; 24*f" foregroundColor="#1E90FF" backgroundColor="#000000" halign="left" transparent="1" borderWidth="2" />
+        <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MeteoForeca/images/foreca-logo.svg" position="370*f,14*f" size="90*f,20*f" alphatest="on" zPosition="2" transparent="1" scale="on" />
+        <eLabel backgroundColor="#0000ff" position="10*f,42*f" size="480*f,2*f" zPosition="-1" />
+        <widget name="config" position="10*f,50*f" size="480*f,120*f" itemHeight="24*f" font="MFRegular;18*f"  scale="on" scrollbarMode="showOnDemand" transparent="1"  backgroundColor="blue" />
+        <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MeteoForeca/images/key_red.svg" position="20*f,180*f" size="24*f,24*f" transparent="1" alphatest="on"  zPosition="3" scale="on" />
+        <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MeteoForeca/images/key_blue.svg" position="270*f,180*f" size="24*f,24*f" transparent="1" alphatest="on"  zPosition="3" scale="on" />
+        <widget name="key_red" position="60*f,180*f" size="200*f,26*f"  font="MFRegular;18*f"  halign="left" transparent="1" valign="center" zPosition="2" />
+        <widget name="key_green" position="310*f,180*f" size="200*f,26*f" font="MFRegular;18*f" halign="left" transparent="1" valign="center" zPosition="2" />
+    </screen> 
+    
+    
+  <screen name="MeteoForecaSearch"  position="center,center" size="840*f,400*f" flags="wfNoBorder" >
+    <eLabel backgroundColor="#E74C3C" position="0,0" size="840*f,2*f"  zPosition="-1" />
+    <eLabel backgroundColor="#E74C3C" position="0,0" size="2*f,400*f"  zPosition="-1" />
+    <eLabel backgroundColor="#E74C3C" position="2*f,398*f" size="836*f,2*f"  zPosition="-1" />
+    <eLabel backgroundColor="#E74C3C" position="838*f,2*f" size="2*f,396*f"  zPosition="-1" />
+    <eLabel backgroundColor="#E74C3C" position="2*f,344*f" size="836*f,2*f"  zPosition="-1" />
+    <eLabel backgroundColor="#E74C3C" position="2*f,44*f" size="836*f,2*f"  zPosition="-1" />
+    <widget name="description" position="10*f,8*f" size="820*f,28*f" font="MFRegular;24*f" halign="center" transparent="1" />
+    <widget source="citylist" render="Listbox" position="10*f,70*f" size="820*f,252*f" scrollbarMode="showNever" scrollbarWidth="2*f" transparent="1" >
+        <convert type="TemplatedMultiContent" >
+          {"template": [
+            MultiContentEntryText(pos=(4*f, 8*f), size=(180*f, 48*f), font=1, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text=0),
+            MultiContentEntryText(pos=(220*f, 2*f), size=(250*f, 56*f), font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text=1),
+            MultiContentEntryText(pos=(470*f, 16*f), size=(150*f, 30*f), font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text=2), 
+            MultiContentEntryText(pos=(600*f, 16*f), size=(100*f, 30*f), font=0, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER | RT_WRAP, text=3),               
+            MultiContentEntryText(pos=(700*f, 16*f), size=(100*f, 30*f), font=0, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER | RT_WRAP, text=4),
+            ],
+            "fonts": [gFont("MFRegular", 16*f), gFont("MFRegular", 18*f)],
+            "itemHeight": 64*f
+          }
+        </convert>
+    </widget>
+    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MeteoForeca/images/key_red.svg" position="30*f,360*f" size="24*f,24*f" transparent="1" alphatest="on"  zPosition="3" scale="on" />
+    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MeteoForeca/images/key_blue.svg" position="430*f,360*f" size="24*f,24*f" transparent="1" alphatest="on"  zPosition="3" scale="on" />
+    <widget name="key_red" position="70*f,360*f" size="240*f,26*f"  font="MFRegular;18*f"  halign="left" transparent="1" valign="center" zPosition="2" />
+    <widget name="key_blue" position="470*f,360*f" size="240*f,26*f" font="MFRegular;18*f" halign="left" transparent="1" valign="center" zPosition="2" />
+  </screen>
+    
+</skin>
