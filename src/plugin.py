@@ -24,7 +24,7 @@ MAIN_URL = "https://www.foreca.com"
 Plugin_Path = os.path.dirname(os.path.realpath(__file__))
 HEADERS = {'User-Agent': 'Mozilla/5.0 (SmartHub; SMART-TV; U; Linux/SmartTV; Maple2012) AppleWebKit/534.7 (KHTML, like Gecko) SmartTV Safari/534.7', 'Accept-Encoding': 'gzip, deflate'}
 lang = language.getLanguage()[:2]
-plugin_version = '1.0'
+plugin_version = '1.1'
 city_list = '/etc/enigma2/meteoforeca_city.json'
 addFont(Plugin_Path + "/skins/Stylo_Bold.ttf", "MFRegular", 100, 1)
 
@@ -128,12 +128,14 @@ class MeteoForeca(Screen):
 
     def weather(self):
         self.Forecast, info_city = download_json()
-        info = _('Country :{}\n').format(info_city['countryName'])
-        info += _('Location :{}\n').format(info_city['name'])
-        info += _('Timezone :{}\n').format(info_city['timezone'])
-        info += _('Longitude :{}\n').format(info_city['lon'])
-        info += _('Latitude :{}\n').format(info_city['lat'])
-        info += _('Elevation :{}\n').format(info_city['elevation'])
+        info = _('Country :{}\n').format(info_city.get('countryName').split(',')[-1])
+        if info_city.get('admName'):
+            info += _('Region :{}\n').format(info_city.get('admName'))
+        info += _('Name :{}\n').format(info_city.get('name'))
+        info += _('Timezone :{}\n').format(info_city.get('timezone'))
+        info += _('Longitude :{}\n').format(info_city.get('lon'))
+        info += _('Latitude :{}\n').format(info_city.get('lat'))
+        info += _('Elevation :{}\n').format(info_city.get('elevation'))
         self["city"].setText(info)
         self.MeteoForeca_Forecast()
 

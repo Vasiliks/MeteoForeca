@@ -2,7 +2,7 @@
 <!-- created by Vasiliks 12.2023 -->
 <skin>
     <screen name="MeteoForeca" position="fill" flags="wfNoBorder" backgroundColor="#00000000" >
-        <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MeteoForeca/images/foreca-logo.svg" position="center,center" size="270*f,60*f" alphatest="on" zPosition="2" transparent="1" scale="on" />
+        <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MeteoForeca/images/foreca-logo.svg" position="center+50*f,center" size="270*f,60*f" alphatest="on" zPosition="2" transparent="1" scale="on" />
         <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MeteoForeca/images/background.png" position="0,0" size="1280*f,720*f" alphatest="on" zPosition="-2" transparent="0" scale="on" />
         <eLabel backgroundColor="#0000CD" position="0,0" size="1280*f,2*f" zPosition="-1" />
         <eLabel backgroundColor="#0000CD" position="0,260*f" size="1280*f,2*f" zPosition="-1" />
@@ -13,7 +13,7 @@
         <eLabel backgroundColor="#0000CD" position="640*f,460*f" size="2*f,720*f" zPosition="-1" />
         <eLabel backgroundColor="#0000CD" position="1278*f,0" size="2*f,720*f" zPosition="-1" />
         
-        <widget name="city" position="40*f,290*f" size="440*f,180*f" font="MFRegular;22*f" foregroundColor="#eeeeee" transparent="1"  split="1" dividechar=":" colposition="220*f" />
+        <widget name="city" position="16*f,286*f" size="490*f,180*f" font="MFRegular;22*f" foregroundColor="#eeeeee" transparent="1"  split="1" dividechar=":" colposition="0" />>
         
         <widget name="date0" position="460*f,18*f" size="170*f,30*f" font="MFRegular;24*f" foregroundColor="#00FF7F" transparent="1" halign="center" />
         <widget name="date1" position="1100*f,18*f" size="160*f,30*f" font="MFRegular;24*f" foregroundColor="#00FF7F" transparent="1" halign="center" />
@@ -97,38 +97,10 @@
         <eLabel backgroundColor="#0000ff" position="10*f,42*f" size="480*f,2*f" zPosition="-1" />
         <widget name="config" position="10*f,50*f" size="480*f,120*f" itemHeight="24*f" font="MFRegular;18*f"  scale="on" scrollbarMode="showOnDemand" transparent="1"  backgroundColor="blue" />
         <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MeteoForeca/images/key_red.svg" position="20*f,180*f" size="24*f,24*f" transparent="1" alphatest="on"  zPosition="3" scale="on" />
-        <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MeteoForeca/images/key_blue.svg" position="270*f,180*f" size="24*f,24*f" transparent="1" alphatest="on"  zPosition="3" scale="on" />
+        <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MeteoForeca/images/key_green.svg" position="270*f,180*f" size="24*f,24*f" transparent="1" alphatest="on"  zPosition="3" scale="on" />
         <widget name="key_red" position="60*f,180*f" size="200*f,26*f"  font="MFRegular;18*f"  halign="left" transparent="1" valign="center" zPosition="2" />
         <widget name="key_green" position="310*f,180*f" size="200*f,26*f" font="MFRegular;18*f" halign="left" transparent="1" valign="center" zPosition="2" />
     </screen> 
     
-    
-  <screen name="MeteoForecaSearch"  position="center,center" size="840*f,400*f" flags="wfNoBorder" >
-    <eLabel backgroundColor="#E74C3C" position="0,0" size="840*f,2*f"  zPosition="-1" />
-    <eLabel backgroundColor="#E74C3C" position="0,0" size="2*f,400*f"  zPosition="-1" />
-    <eLabel backgroundColor="#E74C3C" position="2*f,398*f" size="836*f,2*f"  zPosition="-1" />
-    <eLabel backgroundColor="#E74C3C" position="838*f,2*f" size="2*f,396*f"  zPosition="-1" />
-    <eLabel backgroundColor="#E74C3C" position="2*f,344*f" size="836*f,2*f"  zPosition="-1" />
-    <eLabel backgroundColor="#E74C3C" position="2*f,44*f" size="836*f,2*f"  zPosition="-1" />
-    <widget name="description" position="10*f,8*f" size="820*f,28*f" font="MFRegular;24*f" halign="center" transparent="1" />
-    <widget source="citylist" render="Listbox" position="10*f,70*f" size="820*f,252*f" scrollbarMode="showNever" scrollbarWidth="2*f" transparent="1" >
-        <convert type="TemplatedMultiContent" >
-          {"template": [
-            MultiContentEntryText(pos=(4*f, 8*f), size=(180*f, 48*f), font=1, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text=0),
-            MultiContentEntryText(pos=(220*f, 2*f), size=(250*f, 56*f), font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text=1),
-            MultiContentEntryText(pos=(470*f, 16*f), size=(150*f, 30*f), font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text=2), 
-            MultiContentEntryText(pos=(600*f, 16*f), size=(100*f, 30*f), font=0, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER | RT_WRAP, text=3),               
-            MultiContentEntryText(pos=(700*f, 16*f), size=(100*f, 30*f), font=0, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER | RT_WRAP, text=4),
-            ],
-            "fonts": [gFont("MFRegular", 16*f), gFont("MFRegular", 18*f)],
-            "itemHeight": 64*f
-          }
-        </convert>
-    </widget>
-    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MeteoForeca/images/key_red.svg" position="30*f,360*f" size="24*f,24*f" transparent="1" alphatest="on"  zPosition="3" scale="on" />
-    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MeteoForeca/images/key_blue.svg" position="430*f,360*f" size="24*f,24*f" transparent="1" alphatest="on"  zPosition="3" scale="on" />
-    <widget name="key_red" position="70*f,360*f" size="240*f,26*f"  font="MFRegular;18*f"  halign="left" transparent="1" valign="center" zPosition="2" />
-    <widget name="key_blue" position="470*f,360*f" size="240*f,26*f" font="MFRegular;18*f" halign="left" transparent="1" valign="center" zPosition="2" />
-  </screen>
     
 </skin>
