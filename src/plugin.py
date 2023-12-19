@@ -25,7 +25,6 @@ MAIN_URL = "https://www.foreca.com"
 Plugin_Path = os.path.dirname(os.path.realpath(__file__))
 HEADERS = {'User-Agent': 'Mozilla/5.0 (SmartHub; SMART-TV; U; Linux/SmartTV; Maple2012) AppleWebKit/534.7 (KHTML, like Gecko) SmartTV Safari/534.7', 'Accept-Encoding': 'gzip, deflate'}
 lang = language.getLanguage()[:2]
-plugin_version = '1.2'
 city_list = '/etc/enigma2/meteoforeca_city.json'
 addFont(Plugin_Path + "/skins/Stylo_Bold.ttf", "MFRegular", 100, 0)
 
@@ -86,12 +85,27 @@ def download_json():
     g = '{ "items": %d, %s }' % (j, g)
     return json.loads(g), json.loads(h)
 
+def plugin_version():
+    version = "?"
+    package = 0
+    opkg = {"/usr/lib/opkg/status", "/var/lib/opkg/status", "/var/opkg/status"} 
+    for status in opkg:
+        if os.path.isfile(status):    
+            for line in open(status):
+                if line.find("meteoforeca") > -1:
+                    package = 1
+                if line.find("Version:") > -1 and package == 1:
+                    package = 0
+                    version = line.split()[1]
+                    break
+    return version
+
 
 class MeteoForeca(Screen):
     def __init__(self, session):
         Screen.__init__(self, session)
         self.skin = getSkin("MeteoForeca")
-        self.setTitle(_("Enigma2 MeteoForeca  ver. %s") % plugin_version)
+        self.setTitle(_("Enigma2 MeteoForeca  ver. %s") % plugin_version())
         self["key_red"] = Label(_("Exit"))
         self["key_blue"] = Label(_('Settings'))
         self["city"] = ScrollLabel()
@@ -208,9 +222,11 @@ class MeteoForeca(Screen):
     def cancel(self):
         self.close()
 
+   
     def about(self):
-        self.session.open(MessageBox, _('MeteoForecaForecast\nEnigma2 plugin ver. %s\n©2023 Vasiliks') % plugin_version,
-                          MessageBox.TYPE_INFO, simple=True)
+        self.session.open(MessageBox, 
+        _(' MeteoForecaForecast \n Enigma2 plugin ver. %s \n ©2023 Vasiliks ') % plugin_version(),
+        MessageBox.TYPE_INFO, simple=True)
 
 
 class MeteoForecaConf(ConfigListScreen, Screen):
