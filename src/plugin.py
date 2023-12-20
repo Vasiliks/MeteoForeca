@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # coded by Vasiliks 12.2023
 import os
-import csv
 import json
 import requests
 from six import unichr, ensure_str
