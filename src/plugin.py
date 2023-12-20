@@ -84,12 +84,13 @@ def download_json():
     g = '{ "items": %d, %s }' % (j, g)
     return json.loads(g), json.loads(h)
 
+
 def plugin_version():
     version = "?"
     package = 0
-    opkg = {"/usr/lib/opkg/status", "/var/lib/opkg/status", "/var/opkg/status"} 
+    opkg = {"/usr/lib/opkg/status", "/var/lib/opkg/status", "/var/opkg/status"}
     for status in opkg:
-        if os.path.isfile(status):    
+        if os.path.isfile(status):
             for line in open(status):
                 if line.find("meteoforeca") > -1:
                     package = 1
@@ -221,10 +222,9 @@ class MeteoForeca(Screen):
     def cancel(self):
         self.close()
 
-   
     def about(self):
-        self.session.open(MessageBox, 
-        _(' MeteoForecaForecast \n Enigma2 plugin ver. %s \n ©2023 Vasiliks ') % plugin_version(),
+        self.session.open(MessageBox, _(
+        ' MeteoForecaForecast \n Enigma2 plugin ver. %s \n ©2023 Vasiliks ') % plugin_version(),
         MessageBox.TYPE_INFO, simple=True)
 
 
@@ -238,24 +238,25 @@ class MeteoForecaConf(ConfigListScreen, Screen):
         self['key_green'] = Label(_('Save'))
         self.setTitle(_('Settings'))
         ConfigListScreen.__init__(self, [
+         getConfigListEntry(_('City:'), meteoforecacfg.city),
          getConfigListEntry(_('Temperature:'), meteoforecacfg.temperature),
          getConfigListEntry(_('Wind speed:'), meteoforecacfg.wind_speed),
          getConfigListEntry(_('Pressure:'), meteoforecacfg.pressure),
-         getConfigListEntry(_('Precipitation:'), meteoforecacfg.precipitation),
-         getConfigListEntry(_('City:'), meteoforecacfg.city)
+         getConfigListEntry(_('Precipitation:'), meteoforecacfg.precipitation)
          ])
         self['actions'] = ActionMap(["MeteoForecaActions"], {
-            'ok': self.ok, 
+            'ok': self.ok,
             'green': self.save,
-            'cancel': self.exit, 
+            'cancel': self.exit,
             'red': self.exit
             }, -2)
-          
+
     def ok(self):
-        if self["config"].getCurrentIndex() == 4:
+        if self["config"].getCurrentIndex() == 0:
             self.session.openWithCallback(self.close, MeteoForecaSearch)
         else:
             self.save()
+
     def save(self):
         for x in self['config'].list:
             x[1].save()
@@ -264,16 +265,16 @@ class MeteoForecaConf(ConfigListScreen, Screen):
     def exit(self):
         for x in self['config'].list:
             x[1].cancel()
-        self.close() 
-            
+        self.close()
+
+
 class MeteoForecaSearch(Screen):
 
     def __init__(self, session):
         Screen.__init__(self, session)
         self.session = session
         self.skin = getSkin("MeteoForecaSearch")
-        self['key_red'] = Label(_('Cancel'))
-        self['key_green'] = Label(_('Select'))
+        self['key_red'] = Label(_('Delete'))
         self['description'] = Label()
         self['key_blue'] = Label()
         self.citylist = []
@@ -281,15 +282,15 @@ class MeteoForecaSearch(Screen):
         self['actions'] = ActionMap(["MeteoForecaActions"], {
             'ok': self.ok,
             'cancel': self.exit,
-            "blue": self.openVirtualKeyBoard,
-            'red': self.exit
+            'red': self.delete,
+            "blue": self.openVirtualKeyBoard
         }, -2)
         self.City_List()
 
     def City_List(self):
         self['description'].setText(_('Select City'))
         self['key_blue'].setText(_('Search'))
-        self.citylist = [] 
+        self.citylist = []
         if os.path.isfile(city_list):
             with open(city_list, "r") as f:
                 b = json.load(f)
@@ -301,23 +302,38 @@ class MeteoForecaSearch(Screen):
                     lat = str(i.get('lat'))
                     lon = str(i.get('lon'))
                     link = "{}/{}-{}".format(k, i.get('defaultName'), i.get('defaultCountryName'))
-                    self.citylist.append((name, countryName, timezone,lat, lon, link, ""))    
-                
+                    self.citylist.append((name, countryName, timezone, lat, lon, link, ""))
+
         self["citylist"].setList(self.citylist)
 
     def openVirtualKeyBoard(self):
-        self.session.openWithCallback(self.search, VirtualKeyBoard, title=_('Enter the name of the locality'), text="") 
+        self.session.openWithCallback(self.search, VirtualKeyBoard, title=_('Enter the name of the locality'), text="")
+
+    def delete(self, currentSelect=None):
+        message = _('Do you want to delete  this city?\n\n%s') % (self["citylist"].getCurrent()[0])
+        self.session.openWithCallback(self.delete_item, MessageBox, message, timeout=0, default=False, simple=True)
+
+    def delete_item(self, answer):
+        if answer:
+            del_id = self["citylist"].getCurrent()[5].split('/')[0]
+            if os.path.isfile(city_list):
+                with open(city_list, "r") as f:
+                    b = json.load(f)
+            b.pop(del_id, None)
+            with open(city_list, "w", encoding='utf-8') as f:
+                f.write(json.dumps(b, ensure_ascii=False, sort_keys=False, indent=2))
+            self.City_List()
 
     def ok(self):
-       if self["citylist"]:
+        if self["citylist"]:
             if self["citylist"].getCurrent()[5]:
                 meteoforecacfg.city.setValue(self["citylist"].getCurrent()[5])
                 meteoforecacfg.save()
                 configfile.save()
                 self.close()
             else:
-                new_city  = self["citylist"].getCurrent()[6]
-                city  = {}
+                new_city = self["citylist"].getCurrent()[6]
+                city = {}
                 city["countryName"] = new_city.get("countryName")
                 city["name"] = new_city.get("name")
                 city["defaultCountryName"] = new_city.get("defaultCountryName")
@@ -328,27 +344,27 @@ class MeteoForecaSearch(Screen):
                 if os.path.isfile(city_list):
                     with open(city_list, "r") as f:
                         b = json.load(f)
-                        z= len(b)    
+                        z = len(b)
                 else:
                     z = 0
                     b = {}
-                b.update({self["citylist"].getCurrent()[6].get("id") : city})
+                b.update({self["citylist"].getCurrent()[6].get("id"): city})
                 with open(city_list, "w", encoding='utf-8') as f:
-                    f.write(json.dumps(b,ensure_ascii=False, sort_keys=False, indent=2))
+                    f.write(json.dumps(b, ensure_ascii=False, sort_keys=False, indent=2))
                 self.City_List()
 
     def search(self, city):
         self.citylist = []
         self['description'].setText(_('Result Search for " %s "') % city)
         search_url = 'https://api.foreca.net/locations/search/{}.json?limit=10&lang={}'.format(city, lang)
-        response_search = requests.get(search_url, headers=HEADERS).text 
+        response_search = requests.get(search_url, headers=HEADERS).text
         b = json.loads(response_search)
-        for  i in b.get('results'):
+        for i in b.get('results'):
             countryName = i.get('countryName').replace(", ", "\n")
             name = i.get('name')
             timezone = i.get('timezone')
             lat = str(i.get('lat'))
-            lon = str(i.get('lon')) 
+            lon = str(i.get('lon'))
             self.citylist.append((name, countryName, timezone, lat, lon, "", i))
         self["citylist"].setList(self.citylist)
 
