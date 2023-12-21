@@ -33,6 +33,19 @@ def write_log(value):
         f.write('%s\n' % value)
 
 
+def load_json_from_file(cfile):
+    if os.path.isfile(cfile):
+        with open(cfile, "r") as f:
+            return json.load(f)
+    else:
+        return {}
+
+
+def write_json_to_file(cfile, data={}):
+    with open(cfile, "w", encoding='utf-8') as f:
+        f.write(json.dumps(data, ensure_ascii=False, sort_keys=False, indent=2))
+
+
 def show_svg(svg_file, svg):
     svg.instance.setScale(1)
     svg.instance.setPixmapFromFile(svg_file)
@@ -269,7 +282,6 @@ class MeteoForecaConf(ConfigListScreen, Screen):
 
 
 class MeteoForecaSearch(Screen):
-
     def __init__(self, session):
         Screen.__init__(self, session)
         self.session = session
@@ -291,18 +303,16 @@ class MeteoForecaSearch(Screen):
         self['description'].setText(_('Select City'))
         self['key_blue'].setText(_('Search'))
         self.citylist = []
-        if os.path.isfile(city_list):
-            with open(city_list, "r") as f:
-                b = json.load(f)
-                for k in b:
-                    i = b.get(k)
-                    countryName = i.get('countryName').replace(", ", "\n")
-                    name = i.get('name')
-                    timezone = i.get('timezone')
-                    lat = str(i.get('lat'))
-                    lon = str(i.get('lon'))
-                    link = "{}/{}-{}".format(k, i.get('defaultName'), i.get('defaultCountryName'))
-                    self.citylist.append((name, countryName, timezone, lat, lon, link, ""))
+        b = load_json_from_file(city_list)
+        for k in b:
+            i = b.get(k)
+            countryName = i.get('countryName').replace(", ", "\n")
+            name = i.get('name')
+            timezone = i.get('timezone')
+            lat = str(i.get('lat'))
+            lon = str(i.get('lon'))
+            link = "{}/{}-{}".format(k, i.get('defaultName'), i.get('defaultCountryName'))
+            self.citylist.append((name, countryName, timezone, lat, lon, link, ""))
 
         self["citylist"].setList(self.citylist)
 
@@ -316,12 +326,9 @@ class MeteoForecaSearch(Screen):
     def delete_item(self, answer):
         if answer:
             del_id = self["citylist"].getCurrent()[5].split('/')[0]
-            if os.path.isfile(city_list):
-                with open(city_list, "r") as f:
-                    b = json.load(f)
+            b = load_json_from_file(city_list)
             b.pop(del_id, None)
-            with open(city_list, "w", encoding='utf-8') as f:
-                f.write(json.dumps(b, ensure_ascii=False, sort_keys=False, indent=2))
+            write_json_to_file(city_list, data=b)
             self.City_List()
 
     def ok(self):
@@ -341,16 +348,13 @@ class MeteoForecaSearch(Screen):
                 city["timezone"] = new_city.get("timezone")
                 city["lat"] = new_city.get("lat")
                 city["lon"] = new_city.get("lon")
-                if os.path.isfile(city_list):
-                    with open(city_list, "r") as f:
-                        b = json.load(f)
-                        z = len(b)
+                b = load_json_from_file(city_list)
+                if b:
+                    z = len(b)
                 else:
                     z = 0
-                    b = {}
                 b.update({self["citylist"].getCurrent()[6].get("id"): city})
-                with open(city_list, "w", encoding='utf-8') as f:
-                    f.write(json.dumps(b, ensure_ascii=False, sort_keys=False, indent=2))
+                write_json_to_file(city_list, data=b)
                 self.City_List()
 
     def search(self, city):
